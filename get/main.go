@@ -25,14 +25,14 @@ type Language struct {
 
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	username := os.Getenv("GITHUB_USERNAME")
-	// apiToken := os.Getenv("GITHUB_TOKEN")
+	apiToken := os.Getenv("GITHUB_TOKEN")
 
 	url := fmt.Sprintf("https://api.github.com/users/%s/repos", username)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return events.APIGatewayProxyResponse{StatusCode: 500}, err
 	}
-	// req.Header.Add("Authorization", "token "+apiToken)
+	req.Header.Add("Authorization", "token "+apiToken)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -68,7 +68,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		if err != nil {
 			continue
 		}
-		// req.Header.Add("Authorization", "token "+apiToken)
+		req.Header.Add("Authorization", "token "+apiToken)
 
 		resp, err := client.Do(req)
 		if err != nil {
