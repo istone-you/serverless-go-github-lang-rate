@@ -34,5 +34,4 @@ functions:
           path: /get
           method: get
     environment:
-      GITHUB_TOKEN: ${env:GITHUB_TOKEN}
       GITHUB_USERNAME: ${env:GITHUB_USERNAME}
