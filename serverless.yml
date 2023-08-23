@@ -8,17 +8,14 @@ provider:
   name: aws
   runtime: go1.x
   region: ap-northeast-1
-  httpApi:
-    cors:
-      allowedOrigins:
-        - https://istoneyou.net
-        - http://localhost:3000
-      allowedHeaders:
-        - Content-Type
-        - Authorization
-      allowedMethods:
-        - POST
-      allowCredentials: true
+
+plugins:
+  - serverless-api-gateway-caching
+
+custom:
+  apiGatewayCaching:
+    enabled: true
+    ttlInSeconds: 3600
 
 package:
   patterns:
@@ -30,8 +27,10 @@ functions:
     handler: bin/get
     timeout: 60
     events:
-      - httpApi:
+      - http:
           path: /get
           method: get
+          caching:
+            enabled: true
     environment:
       GITHUB_USERNAME: ${env:GITHUB_USERNAME}

@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "serverless-api-gateway-caching": "^1.10.2"
+  }
+}
