@@ -15,7 +15,7 @@ plugins:
 custom:
   apiGatewayCaching:
     enabled: true
-    ttlInSeconds: 3600
+    ttlInSeconds: 60
 
 package:
   patterns:
